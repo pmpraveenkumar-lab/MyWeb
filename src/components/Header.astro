@@ -1,0 +1,50 @@
+---
+const base = import.meta.env.BASE_URL;
+const links = [
+  { href: base, label: 'Home' },
+  { href: `${base}about/`, label: 'About' },
+];
+const current = Astro.url.pathname;
+---
+
+<header class="container bar">
+  <a class="brand" href={base}>My Site</a>
+  <nav aria-label="Main">
+    {
+      links.map((l) => (
+        <a href={l.href} aria-current={current === l.href ? 'page' : undefined}>
+          {l.label}
+        </a>
+      ))
+    }
+  </nav>
+</header>
+
+<style>
+  .bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-block: 1.25rem;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 2rem;
+  }
+  .brand {
+    font-weight: 700;
+    color: var(--fg);
+    text-decoration: none;
+  }
+  nav {
+    display: flex;
+    gap: 1.25rem;
+  }
+  nav a {
+    color: var(--muted);
+    text-decoration: none;
+  }
+  nav a[aria-current='page'] {
+    color: var(--fg);
+    text-decoration: underline;
+    text-underline-offset: 0.3em;
+  }
+</style>

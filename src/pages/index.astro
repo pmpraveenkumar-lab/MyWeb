@@ -1,0 +1,15 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base title="Home">
+  <h1>Hello, world</h1>
+  <p>
+    This is a static page. Edit <code>src/pages/index.astro</code> and save; the browser reloads on its
+    own.
+  </p>
+  <p>
+    Add a page by creating a file in <code>src/pages/</code>. <code>about.astro</code> becomes
+    <a href={`${import.meta.env.BASE_URL}about/`}>/about/</a>.
+  </p>
+</Base>
