@@ -22,6 +22,17 @@ export const site = {
     { role: 'Proprietor', name: 'Shashirekha Pattar', qualification: 'B.A. B.Ed.' },
     { role: 'Trainer', name: 'Narayan Pattar', qualification: 'M.Sc. B.Ed.' },
   ],
+  coachExperience: '20+ years of teaching experience with various age groups',
+  analysis: {
+    title: "Know Yourself",
+    subtitle: "through Your Handwriting",
+    tags: ["Your nature", "Your strengths", "Your weaknesses", "Thinking pattern", "Confidence level"],
+    solutionHeading: "Solution by the expert",
+    points: ["How to convert your weakness into strength", "How to turn challenges into opportunity"],
+    offer: { label: "Energy exchange", was: "₹999", now: "₹99", note: "Limited-time offer — book your session now" },
+    cta: "Book your session",
+    whatsappText: "Hi, I would like to book a handwriting analysis session.",
+  },
   students: "Hundreds of students",
   approach: {
     heading: "Every student is different",

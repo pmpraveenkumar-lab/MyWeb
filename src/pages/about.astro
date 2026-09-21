@@ -1,17 +1,149 @@
 ---
 import Base from '../layouts/Base.astro';
+import Approach from '../components/Approach.astro';
+import { site } from '../site';
+
+const coach = site.team.find((p) => p.role === 'Trainer')!;
+const a = site.analysis;
+const bookHref = `https://wa.me/${site.whatsapp}?text=${encodeURIComponent(a.whatsappText)}`;
 ---
 
-<Base title="About" description="Meet your handwriting coach.">
+<Base
+  title="About the coach"
+  description={`${coach.name}, ${coach.qualification}. Handwriting analyst and trainer. ${site.coachExperience}.`}
+>
   <h1>About the coach</h1>
+
+  <div class="card">
+    <h2>{coach.name}</h2>
+    <p><strong>{coach.qualification}</strong> · Handwriting Analyst &amp; Trainer</p>
+    <p>{site.coachExperience}.</p>
+  </div>
+
   <p>
-    Placeholder text: introduce yourself here. Share your background, how many years you have taught
-    handwriting, and what students can expect.
+    With more than twenty years in the classroom, {coach.name} has taught learners of many different ages. That
+    experience shapes every batch: patient, personal coaching that meets each student where they are.
   </p>
-  <h2>My approach</h2>
-  <ul>
-    <li>Short, regular practice sessions</li>
-    <li>Personal feedback on every page</li>
-    <li>Patient coaching for every age</li>
-  </ul>
+
+  <Approach />
+
+  <section class="analysis" aria-labelledby="analysis-title">
+    <h2 id="analysis-title">{a.title} <em>{a.subtitle}</em></h2>
+
+    <ul class="tags">
+      {a.tags.map((t) => <li>{t}</li>)}
+    </ul>
+
+    <h3>{a.solutionHeading}</h3>
+    <ul class="points">
+      {a.points.map((p) => <li>{p}</li>)}
+    </ul>
+
+    <div class="offer">
+      <p class="label">{a.offer.label}</p>
+      <p class="price" aria-label={`Was ${a.offer.was}, now ${a.offer.now}`}>
+        <del>{a.offer.was}</del>
+        <strong>{a.offer.now}</strong>
+      </p>
+      <p class="fine">{a.offer.note}</p>
+    </div>
+
+    <p class="cta"><a class="btn" href={bookHref} rel="noopener">{a.cta}</a></p>
+  </section>
 </Base>
+
+<style>
+  .analysis {
+    margin-top: 2.5rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border);
+    text-align: center;
+  }
+  .analysis h2 {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: clamp(1.8rem, 6vw, 2.4rem);
+    margin-bottom: 1rem;
+  }
+  .analysis h2 em {
+    display: block;
+    font-weight: 400;
+    color: var(--accent);
+  }
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.6rem;
+    padding: 0;
+    margin: 0 0 2rem;
+    list-style: none;
+  }
+  .tags li {
+    padding: 0.4rem 1rem;
+    border: 1px solid var(--accent);
+    border-radius: 999px;
+    font-weight: 600;
+  }
+  .analysis h3 {
+    font-size: 0.9rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .points {
+    max-width: 26rem;
+    margin: 0 auto 2rem;
+    padding: 0;
+    list-style: none;
+    text-align: left;
+  }
+  .points li {
+    padding: 0.6rem 0 0.6rem 1.6rem;
+    border-bottom: 1px dashed var(--border);
+    position: relative;
+  }
+  .points li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+  }
+  .offer {
+    max-width: 22rem;
+    margin: 0 auto 1.5rem;
+    padding: 1.25rem;
+    border-radius: 0.9rem;
+    background: #1f3a2f;
+    color: #f5eedd;
+  }
+  .offer .label {
+    margin: 0;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #e0a93b;
+  }
+  .price {
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    gap: 1rem;
+    margin: 0.3rem 0;
+  }
+  .price del {
+    color: #b9c2b4;
+    font-size: 1.3rem;
+  }
+  .price strong {
+    color: #e0a93b;
+    font-family: Georgia, serif;
+    font-size: 2.8rem;
+    line-height: 1.1;
+  }
+  .offer .fine {
+    margin: 0;
+    font-style: italic;
+    font-size: 0.95rem;
+  }
+</style>
