@@ -38,7 +38,7 @@ Local admin: http://localhost:8788/admin/ (the login is skipped on `localhost` o
    - Site key: project → Settings → Variables, build variable `PUBLIC_TURNSTILE_SITEKEY`.
    - Secret key: runtime secret `TURNSTILE_SECRET`.
 6. **Admin login:** Zero Trust → Access → Applications → add a self-hosted application for
-   `yourdomain.com/admin/*` and `yourdomain.com/api/admin/*`, with a policy allowing only your email.
+   `www.yourdomain.com/admin/*` (one rule covers the page and its data), with a policy allowing only your email.
    Then set these runtime variables on the Pages project:
    - `ACCESS_TEAM_DOMAIN` = `yourteam.cloudflareaccess.com`
    - `ACCESS_AUD` = the application's Audience tag

@@ -9,7 +9,7 @@ interface Row {
   email: string;
 }
 
-// Access is enforced by _middleware.ts in this folder.
+// Access is enforced by functions/admin/_middleware.ts, which covers everything under /admin/.
 export const onRequestGet: PagesFunction<Env> = async ({ request, env }) => {
   const { results } = await env.DB.prepare(
     'SELECT id, created_at, name, phone, email FROM enrollments ORDER BY id DESC LIMIT 5000',
