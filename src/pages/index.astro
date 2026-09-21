@@ -1,29 +1,210 @@
 ---
 import Base from '../layouts/Base.astro';
+import Approach from '../components/Approach.astro';
 import { site } from '../site';
 
 const base = import.meta.env.BASE_URL;
+const { batch, offer } = site;
+const details = [
+  { label: 'Duration', value: batch.duration },
+  { label: 'Schedule', value: batch.schedule },
+  { label: 'Session', value: batch.session },
+  { label: 'Batch size', value: batch.size },
+];
 ---
 
-<Base title={site.name}>
-  <h1 class="display">{site.name}</h1>
-  <p class="lead">{site.tagline}</p>
-  <p><a class="btn" href={`${base}enroll/`}>Enroll now</a></p>
+<Base title={site.name} description={`${site.name}: ${batch.duration}, ${batch.session}. ${offer.label} ${offer.now}.`}>
+  <div class="poster">
+    <p class="brand-line">
+      <strong>{site.brand.first}</strong> <span>{site.brand.second}</span>
+    </p>
 
-  <div class="grid">
-    <section class="card">
-      <h2>Clear and neat</h2>
-      <p>Placeholder text: build a steady hand and clear letter shapes, step by step.</p>
-    </section>
-    <section class="card">
-      <h2>Fast and confident</h2>
-      <p>Placeholder text: improve speed without losing neatness, ideal for exams.</p>
-    </section>
-    <section class="card">
-      <h2>Beautiful to read</h2>
-      <p>Placeholder text: cursive, print and an introduction to calligraphy.</p>
-    </section>
+    <h1>
+      The Art of<br />
+      <em>Beautiful Handwriting</em>
+    </h1>
+
+    <blockquote class="quote">{site.quote}</blockquote>
+
+    <dl class="facts">
+      {
+        details.map((d) => (
+          <div>
+            <dt>{d.label}</dt>
+            <dd>{d.value}</dd>
+          </div>
+        ))
+      }
+      <div class="wide">
+        <dt>Open for</dt>
+        <dd>{batch.openFor}</dd>
+      </div>
+    </dl>
+
+    <div class="offer">
+      <p class="price" aria-label={`Was ${offer.was}, now ${offer.now}`}>
+        <del>{offer.was}</del>
+        <strong>{offer.now}</strong>
+      </p>
+      <p class="offer-label">{offer.label}</p>
+    </div>
+    <p class="offer-note">{offer.note}</p>
+
+    <p class="trust">{site.students} have trained with us. <a href={`${base}testimonials/`}>See what they gained</a>.</p>
+
+    <p class="cta"><a class="btn outline" href={`${base}enroll/`}>Enroll today</a></p>
+
+    <Approach />
+
+    <div class="people">
+      {
+        site.team.map((p) => (
+          <p>
+            {p.role} — <span class="name">{p.name}</span>, {p.qualification}
+          </p>
+        ))
+      }
+    </div>
+
+    <p class="contact-line">
+      <a href={`tel:${site.phone.replace(/\s/g, '')}`}>{site.phone}</a>
+      <span aria-hidden="true"> · </span>
+      {site.location}
+    </p>
   </div>
-
-  <p>See the <a href={`${base}programs/`}>programs</a> or <a href={`${base}contact/`}>get in touch</a>.</p>
 </Base>
+
+<style>
+  .poster {
+    max-width: 34rem;
+    margin-inline: auto;
+    text-align: center;
+  }
+  .brand-line {
+    margin: 0 0 1.5rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    color: var(--muted);
+  }
+  .brand-line strong {
+    color: var(--fg);
+  }
+  h1 {
+    margin: 0 0 1.5rem;
+    font-family: Georgia, 'Times New Roman', serif;
+    font-weight: 400;
+    font-size: clamp(2rem, 8vw, 2.9rem);
+  }
+  h1 em {
+    color: var(--accent);
+  }
+  .quote {
+    margin: 0 auto 2rem;
+    max-width: 26rem;
+    font-family: Georgia, serif;
+    font-style: italic;
+    font-size: 1.2rem;
+    color: var(--fg);
+  }
+  .facts {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.9rem 1.5rem;
+    margin: 0 0 2rem;
+    text-align: left;
+  }
+  .facts dt {
+    font-size: 0.72rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .facts dd {
+    margin: 0;
+    font-family: Georgia, serif;
+    font-weight: 700;
+    font-size: 1.1rem;
+  }
+  .facts .wide {
+    grid-column: 1 / -1;
+  }
+  .offer {
+    display: inline-block;
+    padding: 1rem 2rem;
+    border: 1px solid var(--accent);
+    border-radius: 0.9rem;
+    background: var(--card);
+  }
+  .price {
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    gap: 1rem;
+    margin: 0;
+  }
+  .price del {
+    color: var(--muted);
+    font-size: 1.4rem;
+  }
+  .price strong {
+    color: var(--accent);
+    font-family: Georgia, serif;
+    font-size: 2.6rem;
+    line-height: 1.1;
+  }
+  .offer-label {
+    margin: 0.4rem 0 0;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+  .offer-note {
+    margin: 0.75rem 0 1.5rem;
+    font-style: italic;
+    color: var(--muted);
+  }
+  .btn.outline {
+    background: transparent;
+    color: var(--fg);
+    border: 1px solid var(--fg);
+    border-radius: 0.2rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    font-family: Georgia, serif;
+  }
+  .btn.outline:hover {
+    background: var(--fg);
+    color: var(--bg);
+    filter: none;
+  }
+  .trust {
+    margin: 0 0 1rem;
+    color: var(--muted);
+  }
+  .cta {
+    margin: 0 0 2rem;
+  }
+  .people {
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border);
+    font-size: 0.95rem;
+  }
+  .people p {
+    margin: 0.2rem 0;
+  }
+  .name {
+    color: var(--accent);
+    font-weight: 600;
+  }
+  .contact-line {
+    margin: 1rem 0 0;
+    font-size: 0.9rem;
+    color: var(--muted);
+  }
+  .contact-line a {
+    color: var(--muted);
+  }
+</style>

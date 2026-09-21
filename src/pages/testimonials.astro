@@ -1,19 +1,37 @@
 ---
 import Base from '../layouts/Base.astro';
+import Approach from '../components/Approach.astro';
+import { site } from '../site';
+
+const base = import.meta.env.BASE_URL;
 ---
 
-<Base title="Testimonials" description="What students and parents say.">
+<Base title="Testimonials" description="Hundreds of students have trained with us. Hear what they gained.">
   <h1>Testimonials</h1>
-  <p class="note">Sample text only. Replace with real reviews, with permission from the people quoted.</p>
+  <p class="lead">
+    {site.students} have trained with us over the years. They are the best people to tell you what they gained
+    from the classes.
+  </p>
 
   <div class="grid">
-    <blockquote class="card">
-      “Sample review from a parent about their child’s improvement.”
-      <footer>Parent, sample</footer>
-    </blockquote>
-    <blockquote class="card">
-      “Sample review from a student about their exam handwriting.”
-      <footer>Student, sample</footer>
-    </blockquote>
+    <section class="card">
+      <h2>Clear, readable writing</h2>
+      <p>Steady letter shapes and spacing, so that every page is easy to read.</p>
+    </section>
+    <section class="card">
+      <h2>Comfortable speed</h2>
+      <p>Writing faster without giving up neatness, which matters most in exams.</p>
+    </section>
+    <section class="card">
+      <h2>Confidence</h2>
+      <p>The quiet pleasure of handing in a page you are proud of.</p>
+    </section>
   </div>
+
+  <Approach />
+
+  <p>
+    Have questions before you decide? <a href={`${base}contact/`}>Get in touch</a>, or
+    <a href={`${base}enroll/`}>enroll today</a>.
+  </p>
 </Base>
