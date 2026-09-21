@@ -1,0 +1,30 @@
+---
+import Base from '../layouts/Base.astro';
+
+const base = import.meta.env.BASE_URL;
+---
+
+<Base title="Programs" description="Handwriting programs for children, students and adults.">
+  <h1>Programs</h1>
+  <p class="note">Placeholder programs, schedules and fees. Replace them with your own.</p>
+
+  <div class="grid">
+    <section class="card">
+      <h2>Kids</h2>
+      <p>Ages 6–10. Print and first cursive.</p>
+      <p><strong>Duration:</strong> 8 weeks<br /><strong>Fee:</strong> to be announced</p>
+    </section>
+    <section class="card">
+      <h2>Students</h2>
+      <p>Ages 11–17. Speed and neatness for exams.</p>
+      <p><strong>Duration:</strong> 6 weeks<br /><strong>Fee:</strong> to be announced</p>
+    </section>
+    <section class="card">
+      <h2>Adults</h2>
+      <p>Rebuild your handwriting, or start calligraphy.</p>
+      <p><strong>Duration:</strong> 4 weeks<br /><strong>Fee:</strong> to be announced</p>
+    </section>
+  </div>
+
+  <p><a class="btn" href={`${base}enroll/`}>Enroll now</a></p>
+</Base>

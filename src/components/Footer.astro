@@ -1,16 +1,27 @@
 ---
+import { site } from '../site';
+
 const year = new Date().getFullYear();
+const base = import.meta.env.BASE_URL;
 ---
 
 <footer class="container foot">
-  <small>© {year} My Site</small>
+  <small>© {year} {site.name}</small>
+  <small><a href={`${base}privacy/`}>Privacy policy</a></small>
 </footer>
 
 <style>
   .foot {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 0.5rem;
     margin-top: 4rem;
     padding-block: 1.5rem;
     border-top: 1px solid var(--border);
+    color: var(--muted);
+  }
+  .foot a {
     color: var(--muted);
   }
 </style>

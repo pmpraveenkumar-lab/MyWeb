@@ -1,0 +1,61 @@
+---
+import Base from '../layouts/Base.astro';
+
+const base = import.meta.env.BASE_URL;
+// Cloudflare's public test key is the fallback; the real key is set at build time in production.
+const siteKey = import.meta.env.PUBLIC_TURNSTILE_SITEKEY || '1x00000000000000000000AA';
+---
+
+<Base title="Enroll" description="Enroll in a handwriting program.">
+  <h1>Enroll</h1>
+  <p>Leave your details and we will contact you about the next batch.</p>
+
+  <p id="form-error" class="error" role="alert" hidden></p>
+
+  <form class="stack" method="post" action={`${base}api/enroll`}>
+    <label>
+      Name
+      <input name="name" type="text" autocomplete="name" required minlength="2" maxlength="100" />
+    </label>
+    <label>
+      Phone
+      <input name="phone" type="tel" autocomplete="tel" required minlength="7" maxlength="20" inputmode="tel" />
+    </label>
+    <label>
+      Email
+      <input name="email" type="email" autocomplete="email" required maxlength="254" />
+    </label>
+
+    <!-- Spam trap: hidden from people, bots fill it in. -->
+    <div class="trap" aria-hidden="true">
+      <label>Website <input name="website" type="text" tabindex="-1" autocomplete="off" /></label>
+    </div>
+
+    <label class="check">
+      <input name="consent" type="checkbox" required />
+      <span>
+        I agree that my name, phone number and email are stored so you can contact me about this program. See the
+        <a href={`${base}privacy/`}>privacy policy</a>.
+      </span>
+    </label>
+
+    <div class="cf-turnstile" data-sitekey={siteKey}></div>
+
+    <button class="btn" type="submit">Send enrollment</button>
+  </form>
+
+  <script is:inline src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+  <script>
+    const messages: Record<string, string> = {
+      invalid: 'Please check your name, phone number and email, and tick the agreement box.',
+      captcha: 'We could not confirm you are human. Please try again.',
+      server: 'Something went wrong on our side. Please try again in a few minutes, or contact us directly.',
+    };
+    const code = new URLSearchParams(location.search).get('error');
+    const box = document.getElementById('form-error');
+    if (box && code && messages[code]) {
+      box.textContent = messages[code];
+      box.hidden = false;
+    }
+  </script>
+</Base>

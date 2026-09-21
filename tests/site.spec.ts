@@ -1,5 +1,12 @@
 import { test, expect } from '@playwright/test';
 
+// The Turnstile widget comes from Cloudflare; tests never depend on the network.
+test.beforeEach(async ({ page }) => {
+  await page.route('https://challenges.cloudflare.com/**', (r) =>
+    r.fulfill({ contentType: 'text/javascript', body: '' }),
+  );
+});
+
 // Crawls the built site from "/" by following internal links, so new pages are
 // covered automatically with no list to maintain.
 test('every reachable page loads cleanly', async ({ page, request }) => {
@@ -33,9 +40,17 @@ test('every reachable page loads cleanly', async ({ page, request }) => {
     }
   }
 
-  expect(seen.size).toBeGreaterThan(1);
+  // Home, About, Programs, Testimonials, Contact, Enroll, Privacy
+  expect(seen.size).toBeGreaterThanOrEqual(7);
   expect(problems).toEqual([]);
 
   const missing = await request.get('/definitely-not-a-page/');
   expect(missing.status()).toBe(404);
+});
+
+test('the admin page is kept out of search engines and is not linked from the site', async ({ page }) => {
+  await page.goto('/');
+  await expect(page.locator('a[href*="admin"]')).toHaveCount(0);
+  await page.goto('/admin/');
+  await expect(page.locator('meta[name="robots"]')).toHaveAttribute('content', /noindex/);
 });

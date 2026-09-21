@@ -1,15 +1,29 @@
 ---
 import Base from '../layouts/Base.astro';
+import { site } from '../site';
+
+const base = import.meta.env.BASE_URL;
 ---
 
-<Base title="Home">
-  <h1>Hello, world</h1>
-  <p>
-    This is a static page. Edit <code>src/pages/index.astro</code> and save; the browser reloads on its
-    own.
-  </p>
-  <p>
-    Add a page by creating a file in <code>src/pages/</code>. <code>about.astro</code> becomes
-    <a href={`${import.meta.env.BASE_URL}about/`}>/about/</a>.
-  </p>
+<Base title={site.name}>
+  <h1 class="display">{site.name}</h1>
+  <p class="lead">{site.tagline}</p>
+  <p><a class="btn" href={`${base}enroll/`}>Enroll now</a></p>
+
+  <div class="grid">
+    <section class="card">
+      <h2>Clear and neat</h2>
+      <p>Placeholder text: build a steady hand and clear letter shapes, step by step.</p>
+    </section>
+    <section class="card">
+      <h2>Fast and confident</h2>
+      <p>Placeholder text: improve speed without losing neatness, ideal for exams.</p>
+    </section>
+    <section class="card">
+      <h2>Beautiful to read</h2>
+      <p>Placeholder text: cursive, print and an introduction to calligraphy.</p>
+    </section>
+  </div>
+
+  <p>See the <a href={`${base}programs/`}>programs</a> or <a href={`${base}contact/`}>get in touch</a>.</p>
 </Base>

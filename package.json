@@ -11,17 +11,21 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "check": "astro check",
-    "test": "playwright test"
+    "check": "astro check && tsc -p functions",
+    "test": "playwright test",
+    "db:local": "wrangler d1 migrations apply DB --local",
+    "dev:cf": "astro build && wrangler pages dev dist"
   },
   "dependencies": {
     "astro": "^7.3.3"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.10",
+    "@cloudflare/workers-types": "^5.20260921.1",
     "@playwright/test": "^1.63.0",
     "@types/node": "^22.20.4",
-    "typescript": "^6.0.3"
+    "typescript": "^6.0.3",
+    "wrangler": "^4.135.0"
   },
   "allowScripts": {
     "esbuild": true

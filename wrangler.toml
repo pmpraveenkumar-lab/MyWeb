@@ -1,0 +1,11 @@
+name = "beautiful-handwriting"
+compatibility_date = "2026-09-01"
+pages_build_output_dir = "dist"
+
+# Create the database once with:  npx wrangler d1 create handwriting-enrollments
+# then paste the database_id it prints below.
+[[d1_databases]]
+binding = "DB"
+database_name = "handwriting-enrollments"
+database_id = "REPLACE_WITH_ID_FROM_wrangler_d1_create"
+migrations_dir = "migrations"
