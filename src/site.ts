@@ -7,7 +7,7 @@ export const site = {
   quote: "Every steady hand had a patient teacher — we're here to guide yours, one letter at a time.",
   phone: '+91 70191 76595',
   whatsapp: '917019176595', // digits only, with country code
-  email: 'hello@example.com', // placeholder: replace with your real address
+  email: 'narayanbgk@gmail.com',
   location: 'Sector 12, Plot 44/A, 1st Main Rd, Near Vasu Kirani Store, Navanagar, Bagalkot',
   hours: 'Mon–Fri',
   batch: {
