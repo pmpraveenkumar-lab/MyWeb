@@ -4,13 +4,22 @@ updates:
     directory: /
     schedule:
       interval: weekly
+    # Only minor and patch updates are grouped (and auto-merged). Majors arrive
+    # as their own PRs so the auto-merge workflow can leave them for a human.
     groups:
       all:
-        patterns: ['*']
+        update-types: [minor, patch]
+    ignore:
+      # @astrojs/check does not support TypeScript 7 yet; remove when it does.
+      - dependency-name: typescript
+        update-types: ['version-update:semver-major']
+      # Keep Node types aligned with the Node version in .nvmrc.
+      - dependency-name: '@types/node'
+        update-types: ['version-update:semver-major']
   - package-ecosystem: github-actions
     directory: /
     schedule:
       interval: weekly
     groups:
       all:
-        patterns: ['*']
+        update-types: [minor, patch]
