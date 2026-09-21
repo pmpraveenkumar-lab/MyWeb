@@ -4,3 +4,5 @@ TURNSTILE_SECRET=1x0000000000000000000000000000000AA
 ADMIN_EMAIL=you@example.com
 # Skips the admin login, and only when the host is "localhost".
 DEV_ADMIN_BYPASS=1
+# WhatsApp number for the "Book your session" button (digits, country code first).
+WHATSAPP_BOOKING=910000000000

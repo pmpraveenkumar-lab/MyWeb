@@ -31,7 +31,6 @@ export const site = {
     points: ["How to convert your weakness into strength", "How to turn challenges into opportunity"],
     offer: { label: "Energy exchange", was: "₹999", now: "₹99", note: "Limited-time offer — book your session now" },
     cta: "Book your session",
-    whatsappText: "Hi, I would like to book a handwriting analysis session.",
   },
   students: "Hundreds of students",
   approach: {

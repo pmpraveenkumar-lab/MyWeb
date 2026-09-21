@@ -36,6 +36,8 @@ test('every reachable page loads cleanly', async ({ page, request }) => {
     for (const href of hrefs) {
       const url = new URL(href);
       if (url.origin !== new URL(page.url()).origin) continue;
+      // Served by a Cloudflare Function, which the static preview does not run (see book-session.spec.ts).
+      if (url.pathname === '/book-session') continue;
       queue.push(url.pathname);
     }
   }

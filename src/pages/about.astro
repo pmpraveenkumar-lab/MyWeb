@@ -5,7 +5,8 @@ import { site } from '../site';
 
 const coach = site.team.find((p) => p.role === 'Trainer')!;
 const a = site.analysis;
-const bookHref = `https://wa.me/${site.whatsapp}?text=${encodeURIComponent(a.whatsappText)}`;
+// Served by a Cloudflare Function that redirects to WhatsApp, so the number is never in the page.
+const bookHref = `${import.meta.env.BASE_URL}book-session`;
 ---
 
 <Base
@@ -48,7 +49,7 @@ const bookHref = `https://wa.me/${site.whatsapp}?text=${encodeURIComponent(a.wha
       <p class="fine">{a.offer.note}</p>
     </div>
 
-    <p class="cta"><a class="btn" href={bookHref} rel="noopener">{a.cta}</a></p>
+    <p class="cta"><a class="btn" href={bookHref} rel="nofollow">{a.cta}</a></p>
   </section>
 </Base>
 
