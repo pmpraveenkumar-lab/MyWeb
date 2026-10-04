@@ -1,0 +1,47 @@
+---
+// Purely decorative: rows of hand-lettered-style alphabet practice, faded behind the
+// hero text. No quoted or copied text — just the alphabet, the way a practice sheet
+// would show it. Hidden from screen readers and selection; never part of the content.
+const rows = [
+  'Aa Bb Cc Dd Ee',
+  'Ff Gg Hh Ii Jj',
+  'Kk Ll Mm Nn Oo',
+  'Pp Qq Rr Ss Tt',
+  'Uu Vv Ww Xx Yy Zz',
+];
+---
+
+<div class="letter-backdrop" aria-hidden="true">
+  {rows.map((row) => <p>{row}</p>)}
+</div>
+
+<style>
+  .letter-backdrop {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-top: 9rem;
+    padding-bottom: 3.5rem;
+    overflow: hidden;
+    pointer-events: none;
+    user-select: none;
+  }
+  .letter-backdrop p {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: clamp(1.6rem, 5vw, 2.4rem);
+    font-weight: 400;
+    white-space: nowrap;
+    text-align: center;
+    color: var(--accent);
+    opacity: 0.08;
+  }
+  @media (prefers-color-scheme: dark) {
+    .letter-backdrop p {
+      opacity: 0.14;
+    }
+  }
+</style>

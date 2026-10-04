@@ -2,6 +2,7 @@
 import Base from '../layouts/Base.astro';
 import Approach from '../components/Approach.astro';
 import HandwritingSamples from '../components/HandwritingSamples.astro';
+import LetterBackdrop from '../components/LetterBackdrop.astro';
 import { site } from '../site';
 
 const base = import.meta.env.BASE_URL;
@@ -15,7 +16,9 @@ const details = [
 ---
 
 <Base title={site.name} description={`${site.name}: ${batch.duration}, ${batch.session}. ${offer.label} ${offer.now}.`}>
-  <div class="poster">
+  <div class="hero">
+    <LetterBackdrop />
+    <div class="poster">
     <p class="brand-line">
       <strong>{site.brand.first}</strong> <span>{site.brand.second}</span>
     </p>
@@ -72,13 +75,20 @@ const details = [
       <span aria-hidden="true"> · </span>
       {site.location}
     </p>
+    </div>
   </div>
 
   <HandwritingSamples />
 </Base>
 
 <style>
+  .hero {
+    position: relative;
+    overflow: hidden;
+  }
   .poster {
+    position: relative;
+    z-index: 1;
     max-width: 34rem;
     margin-inline: auto;
     text-align: center;
