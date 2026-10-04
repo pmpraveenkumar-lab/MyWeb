@@ -1,0 +1,63 @@
+---
+import { Image } from 'astro:assets';
+import s1 from '../assets/gallery/sample-1.jpg';
+import s2 from '../assets/gallery/sample-2.jpg';
+import s3 from '../assets/gallery/sample-3.jpg';
+import s4 from '../assets/gallery/sample-4.jpg';
+import s5 from '../assets/gallery/sample-5.jpg';
+
+// Captions are intentionally general: these pages show grade-level range only,
+// not a specific grade per photo (no grade is confirmed per image).
+const samples = [
+  { src: s1, alt: 'Handwriting practice page by one of our Grade 3–7 students' },
+  { src: s2, alt: 'Handwriting practice page by one of our Grade 3–7 students' },
+  { src: s3, alt: 'Handwriting practice page by one of our Grade 3–7 students' },
+  { src: s4, alt: 'Handwriting practice page by one of our Grade 3–7 students' },
+  { src: s5, alt: 'Handwriting practice page by one of our Grade 3–7 students' },
+];
+---
+
+<section class="samples" aria-labelledby="samples-title">
+  <h2 id="samples-title">Samples of our students&rsquo; work</h2>
+  <p class="lead">From Grade 3 to Grade 7 — real pages from our classes.</p>
+
+  <div class="sample-grid">
+    {
+      samples.map((sample, i) => (
+        <Image
+          src={sample.src}
+          alt={sample.alt}
+          width={420}
+          loading={i < 2 ? 'eager' : 'lazy'}
+          class="sample-img"
+        />
+      ))
+    }
+  </div>
+</section>
+
+<style>
+  .samples {
+    margin: 2.5rem 0;
+    text-align: center;
+  }
+  .samples h2 {
+    margin-bottom: 0.3rem;
+  }
+  .samples .lead {
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+  }
+  .sample-grid {
+    display: grid;
+    gap: 0.9rem;
+    grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+  }
+  .sample-img {
+    width: 100%;
+    height: auto;
+    border-radius: 0.6rem;
+    border: 1px solid var(--border);
+    background: var(--card);
+  }
+</style>
