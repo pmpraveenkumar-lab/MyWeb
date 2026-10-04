@@ -11,10 +11,11 @@
 
 # Cloudflare Pages adds "Access-Control-Allow-Origin: *" by default. Harmless on public
 # pages/assets, but the API and booking-redirect responses should not declare themselves
-# fetchable cross-origin at all.
+# fetchable cross-origin at all. The unset syntax is "! Header-Name" as its own line,
+# not "Header-Name: !" (which just sets the literal string "!" as the value).
 /api/*
-  Access-Control-Allow-Origin: !
+  ! Access-Control-Allow-Origin
 /admin/api/*
-  Access-Control-Allow-Origin: !
+  ! Access-Control-Allow-Origin
 /book-session
-  Access-Control-Allow-Origin: !
+  ! Access-Control-Allow-Origin
